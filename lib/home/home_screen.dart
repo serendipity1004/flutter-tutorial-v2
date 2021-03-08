@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tutorial_v2/topics/buttons_v2/screen/home.dart'
+    as buttons_v2;
 import 'package:flutter_tutorial_v2/topics/null_safety/screen/home.dart'
     as null_safety;
 
@@ -23,6 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
       name: 'Null Safety',
       page: null_safety.HomeScreen(),
     ),
+    Route(
+      name: 'Buttons V2',
+      page: buttons_v2.HomeScreen(),
+    ),
   ];
 
   renderRoute({
@@ -37,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       },
       child: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(16.0),
         child: Row(
           children: [
             Text(
@@ -58,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
       separatorBuilder: (_, index) {
         return Container(
           height: 1.0,
-          color: Colors.grey,
+          color: Colors.grey[300],
         );
       },
       itemCount: routes.length,
