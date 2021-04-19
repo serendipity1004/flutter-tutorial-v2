@@ -1,4 +1,4 @@
-package com.example.flutter_tutorial_v2
+package com.withj.fluttertutorialv2
 
 import io.flutter.embedding.android.FlutterActivity
 

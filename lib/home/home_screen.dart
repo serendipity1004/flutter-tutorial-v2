@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tutorial_v2/topics/admob_banner/screen/home.dart'
+    as admob_banner;
+import 'package:flutter_tutorial_v2/topics/admob_interstitial_rewarded/screen/home.dart'
+    as admob_interstitial_rewarded;
 import 'package:flutter_tutorial_v2/topics/buttons_v2/screen/home.dart'
     as buttons_v2;
+import 'package:flutter_tutorial_v2/topics/equatable/screen/home.dart'
+    as equatable;
+import 'package:flutter_tutorial_v2/topics/freezed/screen/home.dart' as freezed;
 import 'package:flutter_tutorial_v2/topics/null_safety/screen/home.dart'
     as null_safety;
 
@@ -28,6 +35,22 @@ class _HomeScreenState extends State<HomeScreen> {
     Route(
       name: 'Buttons V2',
       page: buttons_v2.HomeScreen(),
+    ),
+    Route(
+      name: 'Admob - banner',
+      page: admob_banner.HomeScreen(),
+    ),
+    Route(
+      name: 'Admob - interstitial, Rewarded',
+      page: admob_interstitial_rewarded.HomeScreen(),
+    ),
+    Route(
+      name: 'Equatable',
+      page: equatable.HomeScreen(),
+    ),
+    Route(
+      name: 'Freezed',
+      page: freezed.HomeScreen(),
     ),
   ];
 

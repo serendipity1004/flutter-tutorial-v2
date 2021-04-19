@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_tutorial_v2">
+    package="com.withj.fluttertutorialv2">
    <application
         android:label="flutter_tutorial_v2"
         android:icon="@mipmap/ic_launcher">
@@ -37,5 +37,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-    </application>
+       <meta-data
+               android:name="com.google.android.gms.ads.APPLICATION_ID"
+               android:value="ca-app-pub-1202180496302009~1038584427"/>
+   </application>
 </manifest>
