@@ -7,6 +7,8 @@ import 'package:flutter_tutorial_v2/topics/buttons_v2/screen/home.dart'
     as buttons_v2;
 import 'package:flutter_tutorial_v2/topics/equatable/screen/home.dart'
     as equatable;
+import 'package:flutter_tutorial_v2/topics/flutter_bloc/screen/home.dart'
+    as flutter_bloc;
 import 'package:flutter_tutorial_v2/topics/freezed/screen/home.dart' as freezed;
 import 'package:flutter_tutorial_v2/topics/null_safety/screen/home.dart'
     as null_safety;
@@ -51,6 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
     Route(
       name: 'Freezed',
       page: freezed.HomeScreen(),
+    ),
+    Route(
+      name: 'Flutter Bloc',
+      page: flutter_bloc.HomeScreen(),
     ),
   ];
 
