@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class DefaultLayout extends StatefulWidget {
   final Widget body;
   final String? title;
+  final FloatingActionButton? floatingActionButton;
 
   DefaultLayout({
     required this.body,
     this.title,
+    this.floatingActionButton,
   });
 
   @override
@@ -17,12 +19,15 @@ class _DefaultLayoutState extends State<DefaultLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: widget.floatingActionButton,
       appBar: AppBar(
         title: Text(
           widget.title == null ? '코드팩토리' : widget.title!,
         ),
       ),
-      body: widget.body,
+      body: SafeArea(
+        child: widget.body,
+      ),
     );
   }
 }

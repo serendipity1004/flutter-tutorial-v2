@@ -10,6 +10,7 @@ import 'package:flutter_tutorial_v2/topics/equatable/screen/home.dart'
 import 'package:flutter_tutorial_v2/topics/flutter_bloc/screen/home.dart'
     as flutter_bloc;
 import 'package:flutter_tutorial_v2/topics/freezed/screen/home.dart' as freezed;
+import 'package:flutter_tutorial_v2/topics/hive/screen/home.dart' as hive;
 import 'package:flutter_tutorial_v2/topics/null_safety/screen/home.dart'
     as null_safety;
 
@@ -57,6 +58,10 @@ class _HomeScreenState extends State<HomeScreen> {
     Route(
       name: 'Flutter Bloc',
       page: flutter_bloc.HomeScreen(),
+    ),
+    Route(
+      name: 'Hive',
+      page: hive.HomeScreen(),
     ),
   ];
 
