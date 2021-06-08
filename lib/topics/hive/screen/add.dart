@@ -46,7 +46,7 @@ class _AddScreenState extends State<AddScreen> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () async {
-                      final box = await Hive.openBox<WordModel>('word');
+                      final box = Hive.box<WordModel>('word');
 
                       int id = 0;
 
