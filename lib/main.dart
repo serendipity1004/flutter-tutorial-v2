@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tutorial_v2/home/home_screen.dart';
 import 'package:flutter_tutorial_v2/topics/hive/model/word_model.dart';
@@ -6,6 +7,11 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Firebase Init
+  await Firebase.initializeApp();
+
   await Hive.initFlutter();
   Hive.registerAdapter(WordModelAdapter());
   await Hive.openBox<WordModel>('word');

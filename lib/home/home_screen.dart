@@ -9,6 +9,7 @@ import 'package:flutter_tutorial_v2/topics/equatable/screen/home.dart'
     as equatable;
 import 'package:flutter_tutorial_v2/topics/flutter_bloc/screen/home.dart'
     as flutter_bloc;
+import 'package:flutter_tutorial_v2/topics/formz/screen/home.dart' as formz;
 import 'package:flutter_tutorial_v2/topics/freezed/screen/home.dart' as freezed;
 import 'package:flutter_tutorial_v2/topics/hive/screen/home.dart' as hive;
 import 'package:flutter_tutorial_v2/topics/moor/screens/home.dart' as moor;
@@ -67,6 +68,10 @@ class _HomeScreenState extends State<HomeScreen> {
     Route(
       name: 'Moor',
       page: moor.HomeScreen(),
+    ),
+    Route(
+      name: 'Formz',
+      page: formz.HomeScreen(),
     ),
   ];
 
