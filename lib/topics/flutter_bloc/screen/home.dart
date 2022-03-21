@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tutorial_v2/topics/flutter_bloc/bloc/todo_cubit.dart';
 import 'package:flutter_tutorial_v2/topics/flutter_bloc/bloc/todo_state.dart';
 import 'package:flutter_tutorial_v2/topics/flutter_bloc/repository/todo_repository.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -44,7 +45,15 @@ class _HomeWidgetState extends State<HomeWidget> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.read<TodoCubit>().createTodo(this.title);
+          title.isNotEmpty
+              ? context.read<TodoCubit>().createTodo(this.title)
+              : Get.snackbar(
+                  '내용을 입력해주세요',
+                  '',
+                  margin: const EdgeInsets.only(left: 16.0),
+                  snackPosition: SnackPosition.BOTTOM,
+                );
+          ;
         },
         child: Icon(
           Icons.edit,
