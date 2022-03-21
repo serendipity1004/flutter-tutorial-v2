@@ -1,120 +1,126 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_tutorial_v2/topics/flutter_bloc/bloc/todo_cubit.dart';
-import 'package:flutter_tutorial_v2/topics/flutter_bloc/bloc/todo_state.dart';
-import 'package:flutter_tutorial_v2/topics/flutter_bloc/repository/todo_repository.dart';
 import 'package:get/get.dart';
 
+import '../bloc/todo_bloc.dart';
+import '../bloc/todo_event.dart';
+import '../bloc/todo_state.dart';
+import '../repository/todo_repository.dart';
+
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => TodoCubit(repository: TodoRepository()),
+      create: (_) => TodoBloc(repository: TodoRepository()),
       child: HomeWidget(),
     );
   }
 }
 
 class HomeWidget extends StatefulWidget {
+  const HomeWidget({Key? key}) : super(key: key);
+
   @override
-  _HomeWidgetState createState() => _HomeWidgetState();
+  State<HomeWidget> createState() => _HomeWidgetState();
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  String title = '';
-
+  String _title = '';
   @override
   void initState() {
     super.initState();
+    // init read todo list
+    BlocProvider.of<TodoBloc>(context).add(ListTodosEvent());
+  }
 
-    // ListTodosEvent
-    BlocProvider.of<TodoCubit>(context).listTodo();
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter BloC'),
+        title: const Text('Flutter Bloc'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          title.isNotEmpty
-              ? context.read<TodoCubit>().createTodo(this.title)
-              : Get.snackbar(
-                  '내용을 입력해주세요',
-                  '',
-                  margin: const EdgeInsets.only(left: 16.0),
-                  snackPosition: SnackPosition.BOTTOM,
-                );
-          ;
-        },
-        child: Icon(
-          Icons.edit,
-        ),
-      ),
+          onPressed: () {
+            // item create
+            _title.isNotEmpty
+                ? BlocProvider.of<TodoBloc>(context)
+                    .add(CreateTodoEvent(title: _title))
+                : Get.snackbar(
+                    '내용을 입력해주세요',
+                    '',
+                    margin: const EdgeInsets.only(left: 16.0),
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+          },
+          child: const Icon(Icons.edit)),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
           children: [
             TextField(
               onChanged: (val) {
-                this.title = val;
+                _title = val;
               },
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Expanded(
-              child: BlocBuilder<TodoCubit, TodoState>(
+              child: BlocBuilder<TodoBloc, TodoState>(
                 builder: (_, state) {
                   if (state is Empty) {
                     return Container();
                   } else if (state is Error) {
-                    return Container(
-                      child: Text(state.message),
-                    );
+                    return Text(state.message);
                   } else if (state is Loading) {
-                    return Center(
-                      child: CircularProgressIndicator(),
+                    return const Center(
+                      child: CupertinoActivityIndicator(),
                     );
                   } else if (state is Loaded) {
                     final items = state.todos;
-
                     return ListView.separated(
                       itemBuilder: (_, index) {
                         final item = items[index];
-
                         return Row(
                           children: [
-                            Expanded(
-                              child: Text(
-                                item.title,
-                              ),
-                            ),
+                            Container(
+                                margin: const EdgeInsets.only(right: 16),
+                                child: Text(item.id.toString())),
+                            Expanded(child: Text(item.title)),
                             GestureDetector(
                               onTap: () {
-                                BlocProvider.of<TodoCubit>(context).deleteTodo(
-                                  item,
-                                );
+                                // item delete
+                                BlocProvider.of<TodoBloc>(context)
+                                    .add(DeleteTodoEvent(todo: item));
                               },
-                              child: Icon(
+                              child: const Icon(
                                 Icons.delete,
                               ),
                             ),
                           ],
                         );
                       },
-                      separatorBuilder: (_, index) => Divider(),
+                      separatorBuilder: (_, index) => const Divider(),
                       itemCount: items.length,
                     );
                   }
-
-                  return Container();
+                  return SizedBox();
                 },
               ),
             ),
