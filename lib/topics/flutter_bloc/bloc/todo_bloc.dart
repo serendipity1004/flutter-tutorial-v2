@@ -58,8 +58,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         ];
 
         final newTodos = [
-          newTodo,
           ...prevTodos,
+          newTodo,
         ];
 
         yield Loaded(todos: newTodos);
@@ -68,8 +68,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
         yield Loaded(
           todos: [
-            Todo.fromJson(resp),
             ...prevTodos,
+            Todo.fromJson(resp),
           ],
         );
       }
